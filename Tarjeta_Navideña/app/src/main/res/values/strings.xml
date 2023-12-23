@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Tarjeta Navidad</string>
+    <string name="saludo_navidad">Feliz Navidad Chavaleeeeees!!!</string>
 </resources>
