@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">TodoList</string>
+    <string name="app_name">FocusList</string>
+    <string name="hintEmail">Email</string>
+    <string name="hintPassword">Password</string>
+    <string name="loginButton">Enter</string>
+    <string name="signUp">Sign Up</string>
 </resources>

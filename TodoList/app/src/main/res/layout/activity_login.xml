@@ -4,6 +4,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".Login"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:fontFamily="@font/cascadia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="@string/app_name"
+        android:textColor="@color/loginButton"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxHintEmail"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/loginButton"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="120dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:textColorHint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/cascadia"
+            android:id="@+id/inputEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/hintEmail"
+            android:padding="2dp"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boxHintEmail"
+        android:id="@+id/boxHintPassword"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/loginButton"
+        android:textColorHint="@color/black"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/cascadia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/hintPassword"
+            android:id="@+id/inputPassword"
+            android:padding="2dp"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:fontFamily="@font/cascadia"
+        android:id="@+id/loginButton"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:backgroundTint="@color/loginButton"
+        android:text="@string/loginButton"
+        android:textSize="28sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/boxHintPassword" />
+
+    <TextView
+        android:fontFamily="@font/cascadia"
+        android:layout_width="wrap_content"
+        android:text="@string/signUp"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/loginButton"
+        android:layout_marginTop="85dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
