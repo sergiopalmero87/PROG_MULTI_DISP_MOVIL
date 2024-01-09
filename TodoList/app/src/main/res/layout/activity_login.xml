@@ -89,6 +89,7 @@
         app:layout_constraintTop_toTopOf="@+id/boxHintPassword" />
 
     <TextView
+        android:id="@+id/signUp"
         android:fontFamily="@font/cascadia"
         android:layout_width="wrap_content"
         android:text="@string/signUp"

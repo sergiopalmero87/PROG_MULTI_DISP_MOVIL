@@ -4,4 +4,6 @@
     <string name="hintPassword">Password</string>
     <string name="loginButton">Enter</string>
     <string name="signUp">Sign Up</string>
+    <string name="addTask">Add</string>
+    <string name="logout">logOut</string>
 </resources>
