@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/boxHintEmail"
+        android:id="@+id/layoutEmail"
         app:boxBackgroundColor="@color/white"
         app:boxStrokeColor="@color/loginButton"
         android:layout_width="350dp"
@@ -40,7 +40,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:fontFamily="@font/cascadia"
-            android:id="@+id/inputEmail"
+            android:id="@+id/textoEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/hintEmail"
@@ -55,8 +55,8 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boxHintEmail"
-        android:id="@+id/boxHintPassword"
+        app:layout_constraintTop_toBottomOf="@+id/layoutEmail"
+        android:id="@+id/layoutPassword"
         app:boxCornerRadiusTopEnd="8dp"
         app:boxCornerRadiusTopStart="8dp"
         app:boxCornerRadiusBottomEnd="8dp"
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/hintPassword"
-            android:id="@+id/inputPassword"
+            android:id="@+id/textoPassword"
             android:padding="2dp"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -86,10 +86,10 @@
         android:textSize="28sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/boxHintPassword" />
+        app:layout_constraintTop_toTopOf="@+id/layoutPassword" />
 
     <TextView
-        android:id="@+id/signUp"
+        android:id="@+id/signUpButton"
         android:fontFamily="@font/cascadia"
         android:layout_width="wrap_content"
         android:text="@string/signUp"

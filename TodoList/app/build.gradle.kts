@@ -10,9 +10,9 @@ android {
 
     defaultConfig {
         applicationId = "com.edix.todolist"
-        minSdk = 24
+        minSdk = 26
         //noinspection EditedTargetSdkVersion
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -41,10 +41,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
-    // Add the dependency for the Firebase Authentication library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
+
 
 }
 

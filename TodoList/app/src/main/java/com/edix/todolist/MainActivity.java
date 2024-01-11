@@ -12,12 +12,20 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Inicializamos Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
     //Mostramos el menu
@@ -55,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
             //Si el boton pulsado es el de log out, salimos a la activity login
             //y mostramos toast de log out
         }else if(item.getItemId() == R.id.logOut){
-            Intent intent = new Intent(MainActivity.this, Login.class);
-            startActivity(intent);
-            Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+            mAuth.signOut();
+            startActivity(new Intent(MainActivity.this, Login.class));
+            finish();
             return true;
         }else{
             return super.onOptionsItemSelected(item);
