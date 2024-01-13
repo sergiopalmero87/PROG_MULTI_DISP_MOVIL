@@ -46,10 +46,12 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Login en FiraBase
+                // Login en FiraBase
+                // Almacenamos en estas variables y pasamos a string las varibales emailText y passText
                 String email = emailText.getText().toString();
                 String password = passText.getText().toString();
 
+                // Accedemos con email y pass a nuestra cuenta
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -73,11 +75,11 @@ public class Login extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // Almacenamos en estas variables y pasamos a string las varibales emailText y passText
                 String email = emailText.getText().toString();
                 String password = passText.getText().toString();
 
-                //TODO: Crear usuario en FiraBase
+                // Crear usuario en FiraBase con email y pass
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
