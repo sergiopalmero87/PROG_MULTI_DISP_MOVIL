@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         // Inicializamos Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        //Toast de bienvenida a la app.
+        Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
     }
 
     //Mostramos el menu

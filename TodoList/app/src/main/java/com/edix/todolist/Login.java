@@ -55,14 +55,21 @@ public class Login extends AppCompatActivity {
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
+                            //Todo: Mejorar validaciones
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
+                                if (!email.isEmpty() && password.length() >= 6) {
+                                    // Datos correctos
                                     Intent intent = new Intent(Login.this, MainActivity.class);
                                     startActivity(intent);
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+
+                                } else if(email.isEmpty()){
+                                    Toast.makeText(Login.this, "Email incorrecto.", Toast.LENGTH_SHORT).show();
+
+                                } else if(password.length() < 6){
+                                    Toast.makeText(Login.this, "Constraseña incorrecta.", Toast.LENGTH_SHORT).show();
+
+                                }else{
+                                    Toast.makeText(Login.this, "Algo falló. Intentalo de nuevo.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
