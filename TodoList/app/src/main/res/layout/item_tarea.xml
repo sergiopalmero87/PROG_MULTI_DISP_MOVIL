@@ -6,17 +6,19 @@
 
     <TextView
         android:id="@+id/item"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="10dp"
-        android:text="HOLA"
+        android:layout_marginLeft="20dp"
+        android:text="@string/textoTareaUsuer"
         />
 
     <Button
         android:id="@+id/button"
+        android:backgroundTint="@color/loginButton"
         android:text="@string/textButtonTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

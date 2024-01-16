@@ -1,6 +1,7 @@
 package com.edix.todolist;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,13 +15,19 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,8 +126,49 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Metodo que nos sirve para actualizar la UI y escuchar cambios en tiempo real
     private void actualizarUI(){
+        //Accedemos a la bbdd llama Tareas
+        db.collection("Tareas")
+                //Solo nos devuelve aquellos en los que el "usuario"(valor que aparece en firebase)
+                //sea igual a la variable idUser
+                .whereEqualTo("usuario", idUser)
+                //Listener para los cambios en tiempo real
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            //Si hay un fallo salimos
+                            return;
+                        }
 
+                        //Limpiamos las listas para que no haya documentos duplicados
+                        listaTareas.clear();
+                        listaIdTareas.clear();
+
+                        //Iteramos sobre los documentos obtenidos en la consulta
+                        for (QueryDocumentSnapshot doc : value) {
+                            // Añadimos el nombre de la tarea a la lista listaTareas
+                            listaTareas.add(doc.getString("nombreTarea"));
+                            // Añadimos el ID de la tarea a la lista listaIdTareas
+                            listaIdTareas.add(doc.getId());
+                        }
+
+                        //El listView se llena atraves del adapter
+                        //Si no tengo datos en la lista el adapter es null
+                        //Si tengo datos en la lista el adapter se llena
+                        if(listaTareas.size() == 0){
+                            listViewtareas.setAdapter(null);
+                        }else{
+                            //Creamos un array.
+                            // 1º param esta clase, 2º param el layout de item tarea, 3º param el id del view y 4º param con que lo lleno
+                            adapterTareas = new ArrayAdapter<>(MainActivity.this, R.layout.item_tarea, R.id.item, listaTareas);
+                            listViewtareas.setAdapter(adapterTareas);
+                        }
+
+                    }
+                });
     }
 
 }
