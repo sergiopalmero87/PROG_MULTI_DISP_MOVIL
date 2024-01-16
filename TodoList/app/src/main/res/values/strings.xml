@@ -3,8 +3,8 @@
     <string name="hintEmail">Email</string>
     <string name="hintPassword">Password</string>
     <string name="loginButton">Enter</string>
-    <string name="signUp">Sign Up</string>
     <string name="addTask">Add</string>
     <string name="logout">logOut</string>
     <string name="textButtonTask">DONE</string>
+    <string name="signUp">New user? Sign up here!</string>
 </resources>

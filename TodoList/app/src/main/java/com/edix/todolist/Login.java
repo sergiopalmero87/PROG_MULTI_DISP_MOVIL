@@ -62,16 +62,13 @@ public class Login extends AppCompatActivity {
                                     Intent intent = new Intent(Login.this, MainActivity.class);
                                     startActivity(intent);
 
-                                } else if(email.isEmpty()){
-                                    Toast.makeText(Login.this, "Email incorrecto.", Toast.LENGTH_SHORT).show();
-
-                                } else if(password.length() < 6){
-                                    Toast.makeText(Login.this, "Constraseña incorrecta.", Toast.LENGTH_SHORT).show();
-
-                                }else{
-                                    Toast.makeText(Login.this, "Algo falló. Intentalo de nuevo.", Toast.LENGTH_SHORT).show();
+                                } else if (email.isEmpty() || password.length()<6) {
+                                        Toast.makeText(Login.this, "Datos incorrectos", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(Login.this, "Algo salió mal. Intentelo de nuevo", Toast.LENGTH_LONG).show();
                                 }
                             }
+
                         });
             }
         });
@@ -97,10 +94,12 @@ public class Login extends AppCompatActivity {
                                     Toast.makeText(Login.this, "User registrado", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(Login.this, MainActivity.class);
                                     startActivity(intent);
-                                } else {
+                                } else if(email.isEmpty() || password.isEmpty()){
                                     // No se puede registrar el usuario.
-                                    Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this, "Rellene los datos para registrarse", Toast.LENGTH_SHORT).show();
 
+                                }else{
+                                    Toast.makeText(Login.this, "Algo salió mal. Intentelo de nuevo", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
