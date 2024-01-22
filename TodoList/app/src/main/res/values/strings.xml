@@ -5,7 +5,8 @@
     <string name="loginButton">Enter</string>
     <string name="addTask">Add</string>
     <string name="logout">logOut</string>
-    <string name="textButtonTask">DONE</string>
+    <string name="textButtonDone">DONE</string>
+    <string name="textButtonEdit">EDIT</string>
     <string name="signUp">New user? Sign up here!</string>
     <string name="textoTareaUsuer">Tarea</string>
 </resources>

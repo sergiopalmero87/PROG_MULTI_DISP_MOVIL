@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
             //y mostramos toast de log out
         }else if(item.getItemId() == R.id.logOut){
             mAuth.signOut();
+            Toast.makeText(this, "Adiós", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, Login.class));
             finish();
             return true;
@@ -177,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Cuando hacemos click en el boton done de la tarea, borramos la tarea del UI y tambien de la BBDD
     //Si hacemos click en done, podemos obtener el padre y del padre, el hijo con findViewByID
+    //Y la variable tarea es el contenido de la caja de texto.
     public void borrarTarea(View view){//Esta view es el boton de done
         View parent = (View) view.getParent();
         TextView tareaText = parent.findViewById(R.id.nombreTarea);
@@ -185,9 +187,65 @@ public class MainActivity extends AppCompatActivity {
         //guardamos en posicion el index de la tarea
         int posicion = listaTareas.indexOf(tarea);
 
-        //En la bbdd, entramos en la coleccion, entramos al documento, entramos al array y obtenemos la posicion.
+        //En la bbdd, entramos en la coleccion, entramos al documento, entramos al arrayIdTareas y obtenemos la posicion.
         //Tiene que coincidir la posicion de la tarea del arrayTareas con la posicion del id del arrayIdtarea.
         db.collection("Tareas").document(listaIdTareas.get(posicion)).delete();
+        Toast.makeText(this, "¡Tarea terminada!",Toast.LENGTH_SHORT).show();
     }
 
+
+    //Cuando hacemos click en el boton edit de la tarea, editamos la tarea del UI y tambien de la BBDD
+    //Si hacemos click en edit, podemos obtener el padre y del padre, el hijo con findViewByID
+    //Y la variable tarea es el contenido de la caja de texto.
+    public void editarTarea(View view) {
+        View parent = (View) view.getParent();
+        TextView tareaText = parent.findViewById(R.id.nombreTarea);
+        String tarea = tareaText.getText().toString();
+
+        // Guardamos en posicion el índice de la tarea
+        int posicion = listaTareas.indexOf(tarea);
+
+        // Creamos un EditText para que el usuario ingrese el nuevo texto
+        EditText newTask = new EditText(this);
+        newTask.setText(tarea);  // Establecer el texto actual de la tarea
+
+        //Configuramos el alert
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Editar tarea")
+                .setMessage("¿Qué quieres hacer?")
+                .setView(newTask)
+                // Ponemos en escucha al botón de Editar
+                .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //nuevoTexto es lo que haya en el contenido de la caja de texto
+                        String nuevoTexto = newTask.getText().toString();
+
+                        // En la bbdd, entramos en la coleccion, entramos al documento, entramos al arrayIdTareas y obtenemos la posicion.
+                        // Tiene que coincidir la posicion de la tarea del arrayTareas con la posicion del id del arrayIdtarea.
+                        // Actualizamos y en nombreTarea ponemos el nuevoTexto
+                        // Al dar click en el boton editar se actualiza la tarea en UI y BBDD
+                        db.collection("Tareas").document(listaIdTareas.get(posicion))
+                                .update("nombreTarea", nuevoTexto)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        // Actualizamos la lista
+                                        listaTareas.set(posicion, nuevoTexto);
+                                        Toast.makeText(MainActivity.this, "Tarea editada", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(MainActivity.this, "Fallo al editar la tarea", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                })
+                // Ponemos en escucha al botón de Cancelar
+                .setNegativeButton("Cancelar", null)
+                .create();
+        dialog.show();
+    }
 }
