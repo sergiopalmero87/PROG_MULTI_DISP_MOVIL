@@ -10,9 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         listViewtareas = findViewById(R.id.listTareas);
 
         actualizarUI();
+
 
         //Toast de bienvenida a la app.
         Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
@@ -153,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                             listaTareas.add(doc.getString("nombreTarea"));
                             // Añadimos el ID de la tarea a la lista listaIdTareas
                             listaIdTareas.add(doc.getId());
+
                         }
 
                         //El listView se llena atraves del adapter
@@ -163,12 +167,27 @@ public class MainActivity extends AppCompatActivity {
                         }else{
                             //Creamos un array.
                             // 1º param esta clase, 2º param el layout de item tarea, 3º param el id del view y 4º param con que lo lleno
-                            adapterTareas = new ArrayAdapter<>(MainActivity.this, R.layout.item_tarea, R.id.item, listaTareas);
+                            adapterTareas = new ArrayAdapter<>(MainActivity.this, R.layout.item_tarea, R.id.nombreTarea, listaTareas);
                             listViewtareas.setAdapter(adapterTareas);
                         }
 
                     }
                 });
+    }
+
+    //Cuando hacemos click en el boton done de la tarea, borramos la tarea del UI y tambien de la BBDD
+    //Si hacemos click en done, podemos obtener el padre y del padre, el hijo con findViewByID
+    public void borrarTarea(View view){//Esta view es el boton de done
+        View parent = (View) view.getParent();
+        TextView tareaText = parent.findViewById(R.id.nombreTarea);
+        String tarea = tareaText.getText().toString();
+
+        //guardamos en posicion el index de la tarea
+        int posicion = listaTareas.indexOf(tarea);
+
+        //En la bbdd, entramos en la coleccion, entramos al documento, entramos al array y obtenemos la posicion.
+        //Tiene que coincidir la posicion de la tarea del arrayTareas con la posicion del id del arrayIdtarea.
+        db.collection("Tareas").document(listaIdTareas.get(posicion)).delete();
     }
 
 }
