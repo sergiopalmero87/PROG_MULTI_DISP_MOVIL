@@ -7,14 +7,14 @@
     <item
         android:id="@+id/addTask"
         android:title="@string/addTask"
-        android:icon="@mipmap/agregar"
+        android:icon="@mipmap/add"
         app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/logOut"
         android:title="@string/logout"
-        android:icon="@mipmap/out4"
+        android:icon="@mipmap/out"
         app:showAsAction="ifRoom"
         />
 

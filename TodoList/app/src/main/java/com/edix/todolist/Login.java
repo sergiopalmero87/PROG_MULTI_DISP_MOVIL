@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,25 +52,31 @@ public class Login extends AppCompatActivity {
                 String email = emailText.getText().toString();
                 String password = passText.getText().toString();
 
-                // Accedemos con email y pass a nuestra cuenta
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            //Todo: Mejorar validaciones
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (!email.isEmpty() && password.length() >= 6) {
-                                    // Datos correctos
-                                    Intent intent = new Intent(Login.this, MainActivity.class);
-                                    startActivity(intent);
+                if(email.isEmpty()){
+                    emailText.setError("El correo no puede estar vacio");
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    emailText.setError("El correo es incorrecto");
+                }
 
-                                } else if (email.isEmpty() || password.length()<6) {
-                                        Toast.makeText(Login.this, "Datos incorrectos", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    Toast.makeText(Login.this, "Algo salió mal. Intentelo de nuevo", Toast.LENGTH_LONG).show();
+                if(password.length() < 6){
+                    passText.setError("Mínimo 6 caractéres");
+
+                } else{
+                    // Accedemos con email y pass a nuestra cuenta
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // User registrado correctamente
+                                        Intent intent = new Intent(Login.this, MainActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(Login.this, "Algo salió mal. Intentelo de nuevo", Toast.LENGTH_LONG).show();
+                                    }
                                 }
-                            }
-
-                        });
+                            });
+                }
             }
         });
 
@@ -83,26 +90,35 @@ public class Login extends AppCompatActivity {
                 String email = emailText.getText().toString();
                 String password = passText.getText().toString();
 
-                // Crear usuario en FiraBase con email y pass
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            //Al completar la info del nuevo usuario y darle a crear usuario:
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // User registrado correctamente
-                                    Toast.makeText(Login.this, "User registrado", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Login.this, MainActivity.class);
-                                    startActivity(intent);
-                                } else if(email.isEmpty() || password.isEmpty()){
-                                    // No se puede registrar el usuario.
-                                    Toast.makeText(Login.this, "Rellene los datos para registrarse", Toast.LENGTH_SHORT).show();
+                if(email.isEmpty()){
+                    emailText.setError("El correo no puede estar vacio");
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    emailText.setError("El correo es incorrecto");
+                }
 
-                                }else{
-                                    Toast.makeText(Login.this, "Algo salió mal. Intentelo de nuevo", Toast.LENGTH_SHORT).show();
+                if(password.length() < 6){
+                    passText.setError("Mínimo 6 caractéres");
+
+                }else {
+                    // Crear usuario en FiraBase con email y pass
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                //Al completar la info del nuevo usuario y darle a crear usuario:
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // User registrado correctamente
+                                        Toast.makeText(Login.this, "User registrado", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(Login.this, MainActivity.class);
+                                        startActivity(intent);
+                                    } else{
+                                        Toast.makeText(Login.this, "Algo salió mal. Intentelo de nuevo", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
+
+
             }
         });
     }
