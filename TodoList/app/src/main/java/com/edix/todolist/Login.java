@@ -56,11 +56,8 @@ public class Login extends AppCompatActivity {
                     emailText.setError("El correo no puede estar vacio");
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     emailText.setError("El correo es incorrecto");
-                }
-
-                if(password.length() < 6){
+                } else if(password.length() < 6){
                     passText.setError("Mínimo 6 caractéres");
-
                 } else{
                     // Accedemos con email y pass a nuestra cuenta
                     mAuth.signInWithEmailAndPassword(email, password)
@@ -94,11 +91,8 @@ public class Login extends AppCompatActivity {
                     emailText.setError("El correo no puede estar vacio");
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     emailText.setError("El correo es incorrecto");
-                }
-
-                if(password.length() < 6){
+                } else if(password.length() < 6){
                     passText.setError("Mínimo 6 caractéres");
-
                 }else {
                     // Crear usuario en FiraBase con email y pass
                     mAuth.createUserWithEmailAndPassword(email, password)
