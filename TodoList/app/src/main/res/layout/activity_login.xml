@@ -20,7 +20,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:elevation="3dp"
+        android:elevation="20dp"
         android:background="@color/cardview_light_background"
         />
 
