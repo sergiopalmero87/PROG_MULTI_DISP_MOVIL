@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Toast de bienvenida a la app.
-        Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Welcome 👋🏼", Toast.LENGTH_SHORT).show();
     }
 
     //Mostramos el menu
@@ -80,11 +80,11 @@ public class MainActivity extends AppCompatActivity {
             EditText newTask = new EditText(this);
             //Configuramos el alert
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle("Nueva tarea")
-                    .setMessage("¿Qué quieres hacer?")
+                    .setTitle("New task")
+                    .setMessage("What do you want to do?")
                     .setView(newTask)
                     //Ponemos en escucha al boton de Añadir.
-                    .setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Add tarea a bbdd y despues el toast
@@ -98,20 +98,20 @@ public class MainActivity extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(MainActivity.this, "Tarea añadida", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this, "Task added", Toast.LENGTH_SHORT).show();
                                             return;                                        }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(MainActivity.this, "Fallo al crear la tarea", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this, "Task creation failed", Toast.LENGTH_SHORT).show();
 
                                         }
                                     });
                         }
                     })
                     //Ponemos en escucha al boton de Cancelar.
-                    .setNegativeButton("Cancelar", null)
+                    .setNegativeButton("Cancel", null)
                     .create();
             dialog.show();
             return true;
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             //y mostramos toast de log out
         }else if(item.getItemId() == R.id.logOut){
             mAuth.signOut();
-            Toast.makeText(this, "Adiós", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bye!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, Login.class));
             finish();
             return true;
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         //En la bbdd, entramos en la coleccion, entramos al documento, entramos al arrayIdTareas y obtenemos la posicion.
         //Tiene que coincidir la posicion de la tarea del arrayTareas con la posicion del id del arrayIdtarea.
         db.collection("Tareas").document(listaIdTareas.get(posicion)).delete();
-        Toast.makeText(this, "¡Tarea terminada!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "¡Task done!",Toast.LENGTH_SHORT).show();
     }
 
 
@@ -211,11 +211,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Configuramos el alert
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Editar tarea")
-                .setMessage("¿Qué quieres hacer?")
+                .setTitle("Edit task")
+                .setMessage("What do you want to do?")
                 .setView(newTask)
                 // Ponemos en escucha al botón de Editar
-                .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //nuevoTexto es lo que haya en el contenido de la caja de texto
@@ -232,19 +232,19 @@ public class MainActivity extends AppCompatActivity {
                                     public void onSuccess(Void aVoid) {
                                         // Actualizamos la lista
                                         listaTareas.set(posicion, nuevoTexto);
-                                        Toast.makeText(MainActivity.this, "Tarea editada", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "Task edited", Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(MainActivity.this, "Fallo al editar la tarea", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "Task editing failed", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                     }
                 })
                 // Ponemos en escucha al botón de Cancelar
-                .setNegativeButton("Cancelar", null)
+                .setNegativeButton("Cancel", null)
                 .create();
         dialog.show();
     }

@@ -53,11 +53,11 @@ public class Login extends AppCompatActivity {
                 String password = passText.getText().toString();
 
                 if(email.isEmpty()){
-                    emailText.setError("El correo no puede estar vacio");
+                    emailText.setError("The email can not be empty");
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    emailText.setError("El correo es incorrecto");
+                    emailText.setError("Incorect email");
                 } else if(password.length() < 6){
-                    passText.setError("Mínimo 6 caractéres");
+                    passText.setError("Minimum 6 characters");
                 } else{
                     // Accedemos con email y pass a nuestra cuenta
                     mAuth.signInWithEmailAndPassword(email, password)
@@ -69,7 +69,7 @@ public class Login extends AppCompatActivity {
                                         Intent intent = new Intent(Login.this, MainActivity.class);
                                         startActivity(intent);
                                     } else {
-                                        Toast.makeText(Login.this, "Algo salió mal. Intentelo de nuevo", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Login.this, "Something went wrong. Try it again", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -88,11 +88,11 @@ public class Login extends AppCompatActivity {
                 String password = passText.getText().toString();
 
                 if(email.isEmpty()){
-                    emailText.setError("El correo no puede estar vacio");
+                    emailText.setError("The email can not be empty");
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    emailText.setError("El correo es incorrecto");
+                    emailText.setError("Incorrect email");
                 } else if(password.length() < 6){
-                    passText.setError("Mínimo 6 caractéres");
+                    passText.setError("Minimum 6 characters");
                 }else {
                     // Crear usuario en FiraBase con email y pass
                     mAuth.createUserWithEmailAndPassword(email, password)
@@ -102,11 +102,11 @@ public class Login extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // User registrado correctamente
-                                        Toast.makeText(Login.this, "User registrado", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, "User registered", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(Login.this, MainActivity.class);
                                         startActivity(intent);
                                     } else{
-                                        Toast.makeText(Login.this, "Algo salió mal. Intentelo de nuevo", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, "Something went wrong. Try it again", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
